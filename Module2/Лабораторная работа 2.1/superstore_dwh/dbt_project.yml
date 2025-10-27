@@ -1,0 +1,21 @@
+name: 'superstore_dwh'
+version: '1.0.0'
+config-version: 2
+
+profile: 'superstore_dwh'
+
+model-paths: ["models"]
+# ... другие пути
+clean-targets: ["target", "dbt_packages"]
+
+models:
+  superstore_dwh:
+    staging:
+      +materialized: view
+      +schema: stg
+    intermediate:
+      +materialized: view
+      +schema: dw_intermediate # Создадим для них
+    marts:
+      +materialized: table
+      +schema: dw_test
